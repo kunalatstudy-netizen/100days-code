@@ -1,29 +1,35 @@
 from art import logo
 print(logo)
 
-biders = {}
-game_over = False
-def winner(bider):
-    winner_win = 0
-    for key in biders:
-        if bid > winner_win:
-            winner_win = bid
+def auction_winner(bider_list):
+    winner_name = ""
+    win_amount = 0
+
+    for key in bider_list:
+        if bider_list[key] > win_amount:
+            win_amount = bider_list[key]
+            winner_name += key
         else:
-            winner_win = winner_win
-    print(f"The winner is {winner_win} with a bid of ${bid}")
+            winner_name = winner_name
+            win_amount = win_amount
+    print(f"{winner_name} won the auction with the bid of ${win_amount}")
 
+auction_over = False
+while not auction_over:
+    bider_list = {}
+    name = input("What is your name?")
+    bid = int(input("What is your bid?$ "))
+    bider_list[name] = bid
+    more_bider = input("Are there any other bidders? Type 'yes or 'no'")
 
-
-
-
-while game_over == False:
-    name = input("What is your name? ")
-    bid = int(input("What is your bid? "))
-    more_bider = input("Are there any other bidders? Type 'yes' or 'no': ")
-    biders[name] = bid
-    if more_bider == "yes":
-        game_over = False
+    if more_bider == 'yes':
+        print("\n" * 20)
+        auction_over = False
     else:
-        game_over = True
-        winner(biders[name])
+        auction_winner(bider_list)
+        auction_over = True
+
+
+
+
 
